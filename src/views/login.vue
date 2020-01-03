@@ -8,12 +8,15 @@
       </van-field>
     </van-cell-group>
     <div class="login-btn">
-      <van-button type="info" @click="login">登录</van-button>
+      <van-button type="info" @click="onLogin">登录</van-button>
     </div>
   </div>
 </template>
 
 <script>
+import { login } from '../api/user'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'Login',
   data () {
@@ -24,9 +27,19 @@ export default {
       }
     }
   },
-  method: {
-    login () {
+  computed: {
 
+  },
+  methods: {
+    ...mapMutations(['setUser']),
+    async onLogin () {
+      const res = await login(this.user)
+      // console.log(res)
+      if (res.status === 201) {
+        this.setUser(res.data.data)
+        // console.log()
+        this.$router.push('/')
+      }
     }
   }
 }

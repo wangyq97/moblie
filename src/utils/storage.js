@@ -1,9 +1,9 @@
-export const setLocal = name => {
-  return JSON.parse(window.localStorage.setItem(name))
+export const getLocal = name => {
+  return JSON.parse(window.localStorage.getItem(name))
 }
 
-export const getLocal = (name, value) => {
-  window.localStorage.getItem(name, JSON.stringify(value))
+export const setLocal = (name, value) => {
+  window.localStorage.setItem(name, JSON.stringify(value))
 }
 
 export const removeLocal = name => {
