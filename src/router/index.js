@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/login.vue'
-import Home from '../views/home.vue'
+import Login from '../views/login/index.vue'
+import Tabbar from '../views/tabbar.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +12,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/',
-    name: 'home',
-    component: Home
+    path: '',
+    name: 'tabbar',
+    component: Tabbar
   }
 ]
 

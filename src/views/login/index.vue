@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { login } from '../api/user'
+import { login } from '../../api/user'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -31,14 +31,24 @@ export default {
 
   },
   methods: {
-    ...mapMutations(['setUser']),
+    ...mapMutations({
+      setUser: 'setUser'
+    }),
     async onLogin () {
-      const res = await login(this.user)
-      // console.log(res)
-      if (res.status === 201) {
-        this.setUser(res.data.data)
-        // console.log()
-        this.$router.push('/')
+      try {
+        const res = await login(this.user)
+        // console.log(res)
+        if (res.status === 201) {
+          this.setUser(res.data.data)
+          // console.log()
+          this.$toast.success('登录成功')
+          this.$router.push('/')
+        } else {
+          this.$toast.fail('登录失败')
+        }
+      } catch (err) {
+        this.$toast.fail('登录失败')
+        console.log(err.message)
       }
     }
   }
